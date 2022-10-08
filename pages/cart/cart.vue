@@ -1,6 +1,6 @@
 <template>
   <view>
-    cart
+    cart吃
   </view>
 </template>
 
