@@ -14,7 +14,7 @@
       return {
         queryObj:{
           query:'',
-          cid:'',
+          cat_id:'',
           pagenum:1,
           pagesize:10
         },
@@ -25,7 +25,7 @@
     },
     onLoad(options) {
       this.queryObj.query = options.query || ''
-      this.queryObj.cid = options.cid || ''
+      this.queryObj.cat_id = options.cat_id || ''
       this.getGoodsList()
     },
     methods:{

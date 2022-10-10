@@ -27,7 +27,14 @@
         {
           "name": "",
           "pathName": "subpkg/goods_list/goods_list",
-          "query": "cid=5",
+          "query": "cat_id=5",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/goods_detail/goods_detail",
+          "query": "goods_id=395",
           "launchMode": "default",
           "scene": null
         }
