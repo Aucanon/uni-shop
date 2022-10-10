@@ -130,7 +130,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
 //
 //
 //
@@ -139,10 +143,55 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      queryObj: {
+        query: '',
+        cid: '',
+        pagenum: 1,
+        pagesize: 10 },
 
+      goodsList: [],
+      total: 0,
+      isloading: false };
 
+  },
+  onLoad: function onLoad(options) {
+    this.queryObj.query = options.query || '';
+    this.queryObj.cid = options.cid || '';
+    this.getGoodsList();
+  },
+  methods: {
+    getGoodsList: function getGoodsList(cb) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                _this.isloading = true;_context.next = 3;return (
+                  uni.$http.get('/api/public/v1/goods/search', _this.queryObj));case 3:_yield$uni$$http$get = _context.sent;result = _yield$uni$$http$get.data;
+                _this.isloading = false;
+                cb && cb();if (!(
+                result.meta.status !== 200)) {_context.next = 9;break;}return _context.abrupt("return", uni.$showMessage());case 9:
+                _this.goodsList = [].concat(_toConsumableArray(_this.goodsList), _toConsumableArray(result.message.goods));
+                _this.total = result.message.total;case 11:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    goToDetail: function goToDetail(item) {
+      uni.navigateTo({
+        url: '/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id });
+
+    } },
+
+  onReachBottom: function onReachBottom() {
+    if (this.queryObj.pagenum * this.queryObj.pagesize > this.total) return uni.$showMessage('数据加载完毕！');
+    if (this.isloading) return;
+    this.queryObj.pagenum++;
+    this.getGoodsList();
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.queryObj.pagenum = 1;
+    this.total = 0;
+    this.isloading = false;
+    this.goodsList = [];
+    this.getGoodsList(function () {
+      uni.stopPullDownRefresh();
+    });
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 
