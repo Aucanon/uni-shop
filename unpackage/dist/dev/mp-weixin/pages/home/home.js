@@ -173,6 +173,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -221,6 +224,11 @@ var _default =
                   });
                 });
                 _this3.floorList = result.message;case 8:case "end":return _context3.stop();}}}, _callee3);}))();
+    },
+    goToSearch: function goToSearch() {
+      uni.navigateTo({
+        url: '/subpkg/search/search' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
