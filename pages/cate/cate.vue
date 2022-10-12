@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import badegeMix from '@/mixins/tabbar-badge.js'
   export default {
     data() {
       return {
@@ -42,6 +43,7 @@
       this.wh = sysInfo.windowHeight - 50
       this.getCateList()
     },
+    mixins:[badegeMix],
     methods:{
       async getCateList(){
         const {data:result} = await uni.$http.get('/api/public/v1/categories')
