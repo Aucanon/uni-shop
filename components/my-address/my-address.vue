@@ -37,7 +37,7 @@
       async chooseAddress(){
         const [err,succ] = await uni.chooseAddress().catch(err => err)
         if(err === null && succ.errMsg === 'chooseAddress:ok'){
-          this.updataAddress(succ)
+          this.updateAddress(succ)
         }
         console.log(err);
         // if(err && err.errMsg === 'chooseAddress:fail the api need to be declared in the requiredPrivateInfos field in app.json/ext.json'){
@@ -45,7 +45,7 @@
         //   this.reAuth()
         // } 
       },
-      ...mapMutations('m_user',['updataAddress']),
+      ...mapMutations('m_user',['updateAddress']),
       // async reAuth() {
       //   const [err2, confirmResult] = await uni.showModal({
       //     content: '检测到您没打开地址权限，是否去设置打开？',
