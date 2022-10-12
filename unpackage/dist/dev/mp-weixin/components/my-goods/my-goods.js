@@ -77,6 +77,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uniNumberBox: function() {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-number-box/components/uni-number-box/uni-number-box */ "uni_modules/uni-number-box/components/uni-number-box/uni-number-box").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-number-box/components/uni-number-box/uni-number-box.vue */ 135))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -142,6 +165,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
 var _default =
 {
   name: "my-goods",
@@ -153,12 +178,34 @@ var _default =
   props: {
     item: {
       type: Object,
-      default: {} } },
+      default: {} },
+
+    showRadio: {
+      type: Boolean,
+      default: false },
+
+    showNum: {
+      type: Boolean,
+      default: false } },
 
 
   filters: {
     tofixed: function tofixed(num) {
       return Number(num).toFixed(2);
+    } },
+
+  methods: {
+    radioClickHandler: function radioClickHandler() {
+      this.$emit('radio-change', {
+        goods_id: this.item.goods_id,
+        goods_state: !this.item.goods_state });
+
+    },
+    numChangeHandler: function numChangeHandler(val) {
+      this.$emit('num-change', {
+        goods_id: this.item.goods_id,
+        goods_count: +val });
+
     } } };exports.default = _default;
 
 /***/ }),

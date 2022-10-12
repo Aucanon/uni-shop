@@ -3,13 +3,15 @@
     <view class="goods-item">
       <!-- left -->
       <view class="goods-item-left">
+        <radio :checked="item.goods_state" color="#C00000" v-if="showRadio" @click="radioClickHandler"></radio>
         <image :src="item.goods_small_logo || defaultImg" mode="" class="goods-img"></image>
       </view>
       <!-- right -->
       <view class="goods-item-right">
         <view class="goods-name">{{item.goods_name}}</view>
-        <view class="goods-info">
+        <view class="goods-info-box">
           <view class="goods-price">￥{{item.goods_price | tofixed}}</view>
+          <uni-number-box :min="1" :value="item.goods_count" v-if="showNum" @change="numChangeHandler"></uni-number-box>
         </view>
       </view>
     </view>
@@ -28,11 +30,33 @@
       item:{
         type:Object,
         default:{}
+      },
+      showRadio:{
+        type:Boolean,
+        default:false
+      },
+      showNum:{
+        type:Boolean,
+        default:false
       }
     },
     filters:{
       tofixed(num){
         return Number(num).toFixed(2)
+      }
+    },
+    methods:{
+      radioClickHandler(){
+        this.$emit('radio-change',{
+          goods_id:this.item.goods_id,
+          goods_state:!this.item.goods_state
+        })
+      },
+      numChangeHandler(val){
+        this.$emit('num-change',{
+          goods_id:this.item.goods_id,
+          goods_count:+val
+        })
       }
     }
   }
@@ -40,11 +64,16 @@
 
 <style lang="scss">
 .goods-item{
+  width: 750rpx;
+  box-sizing: border-box;
   display: flex;
   padding: 10px 5px;
   border-bottom: 1px solid #f0f0f0;
   .goods-item-left{
     margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .goods-img{
       width: 100px;
       height: 100px;
@@ -53,12 +82,16 @@
   }
   .goods-item-right{
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-between;
     .goods-name{
       font-size: 13px;
     }
-    .goods-info{
+    .goods-info-box{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .goods-price{
         font-size: 16px;
         color: #C00000;
