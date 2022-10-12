@@ -18,14 +18,14 @@ export default{
     saveToStorage(state){
       uni.setStorageSync('cart',JSON.stringify(state.cart))
     },
-    updataGoodsState(state,goods){
+    updateGoodsState(state,goods){
       const findResult = state.cart.find(x => x.goods_id === goods.goods_id)
       if(findResult){
         findResult.goods_state = goods.goods_state
         this.commit('m_cart/saveToStorage')
       }
     },
-    updataGoodsCount(state,goods){
+    updateGoodsCount(state,goods){
       const findResult = state.cart.find(x => x.goods_id === goods.goods_id)
       if(findResult){
         findResult.goods_count = goods.goods_count
@@ -36,7 +36,7 @@ export default{
       state.cart = state.cart.filter(x => x.goods_id !== goods_id)
       this.commit('m_cart/saveToStorage')
     },
-    updataAllGoodsState(state,newState){
+    updateAllGoodsState(state,newState){
       state.cart.forEach(item => item.goods_state = newState)
       this.commit('m_cart/saveToStorage')
     }

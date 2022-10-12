@@ -45,13 +45,13 @@
     },
     methods:{
       radioChangeHandler(e){
-        this.updataGoodsState(e)
+        this.updateGoodsState(e)
       },
-      ...mapMutations('m_cart',['updataGoodsState']),
-      ...mapMutations('m_cart',['updataGoodsCount']),
+      ...mapMutations('m_cart',['updateGoodsState']),
+      ...mapMutations('m_cart',['updateGoodsCount']),
       ...mapMutations('m_cart',['removeGoodsById']),
       numChangeHandler(e){
-        this.updataGoodsCount(e)
+        this.updateGoodsCount(e)
       },
       swipeItemClickHandler(goods){
         this.removeGoodsById(goods.goods_id)

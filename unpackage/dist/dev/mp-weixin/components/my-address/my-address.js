@@ -198,7 +198,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
     chooseAddress: function chooseAddress() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$chooseAddr, _yield$uni$chooseAddr2, err, succ;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.chooseAddress().catch(function (err) {return err;}));case 2:_yield$uni$chooseAddr = _context.sent;_yield$uni$chooseAddr2 = _slicedToArray(_yield$uni$chooseAddr, 2);err = _yield$uni$chooseAddr2[0];succ = _yield$uni$chooseAddr2[1];
                 if (err === null && succ.errMsg === 'chooseAddress:ok') {
-                  _this.updataAddress(succ);
+                  _this.updateAddress(succ);
                 }
                 console.log(err);
                 // if(err && err.errMsg === 'chooseAddress:fail the api need to be declared in the requiredPrivateInfos field in app.json/ext.json'){
@@ -206,7 +206,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
                 //   this.reAuth()
                 // } 
               case 8:case "end":return _context.stop();}}}, _callee);}))();} },
-  (0, _vuex.mapMutations)('m_user', ['updataAddress'])),
+  (0, _vuex.mapMutations)('m_user', ['updateAddress'])),
 
 
 

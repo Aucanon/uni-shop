@@ -5968,14 +5968,14 @@ module.exports = JSON.parse("{\"uni-goods-nav.options.shop\":\"店鋪\",\"uni-go
     saveToStorage: function saveToStorage(state) {
       uni.setStorageSync('cart', JSON.stringify(state.cart));
     },
-    updataGoodsState: function updataGoodsState(state, goods) {
+    updateGoodsState: function updateGoodsState(state, goods) {
       var findResult = state.cart.find(function (x) {return x.goods_id === goods.goods_id;});
       if (findResult) {
         findResult.goods_state = goods.goods_state;
         this.commit('m_cart/saveToStorage');
       }
     },
-    updataGoodsCount: function updataGoodsCount(state, goods) {
+    updateGoodsCount: function updateGoodsCount(state, goods) {
       var findResult = state.cart.find(function (x) {return x.goods_id === goods.goods_id;});
       if (findResult) {
         findResult.goods_count = goods.goods_count;
@@ -5986,7 +5986,7 @@ module.exports = JSON.parse("{\"uni-goods-nav.options.shop\":\"店鋪\",\"uni-go
       state.cart = state.cart.filter(function (x) {return x.goods_id !== goods_id;});
       this.commit('m_cart/saveToStorage');
     },
-    updataAllGoodsState: function updataAllGoodsState(state, newState) {
+    updateAllGoodsState: function updateAllGoodsState(state, newState) {
       state.cart.forEach(function (item) {return item.goods_state = newState;});
       this.commit('m_cart/saveToStorage');
     } },
@@ -6072,16 +6072,36 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-
   namespaced: true,
 
   state: function state() {return {
-      address: JSON.parse(uni.getStorageSync('address') || '{}') };},
+      address: JSON.parse(uni.getStorageSync('address') || '{}'),
+      token: uni.getStorageSync('token') || '',
+      userInfo: JSON.parse(uni.getStorageSync('userinfo') || '{}'),
+      redirectInfo: null };},
 
 
   mutations: {
-    updataAddress: function updataAddress(state, address) {
+    updateAddress: function updateAddress(state, address) {
       state.address = address;
       this.commit('m_user/saveAddressToStorage');
     },
     saveAddressToStorage: function saveAddressToStorage(state) {
       uni.setStorageSync('address', JSON.stringify(state.address));
+    },
+    saveUserInfoToStorage: function saveUserInfoToStorage(state) {
+      uni.setStorageSync('userinfo', JSON.stringify(state.userInfo));
+    },
+    updateUserInfo: function updateUserInfo(state, userInfo) {
+      state.userInfo = userInfo;
+      this.commit('m_user/saveUserInfoToStorage');
+    },
+    saveToken: function saveToken(state) {
+      uni.setStorageSync('token', state.token);
+    },
+    updateToken: function updateToken(state, token) {
+      state.token = token;
+      this.commit('m_user/saveToken');
+    },
+    updateRedirectInfo: function updateRedirectInfo(state, info) {
+      state.redirectInfo = info;
     } },
 
 

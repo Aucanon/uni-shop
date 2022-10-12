@@ -113,7 +113,7 @@ try {
       return __webpack_require__.e(/*! import() | components/my-goods/my-goods */ "components/my-goods/my-goods").then(__webpack_require__.bind(null, /*! @/components/my-goods/my-goods.vue */ 126))
     },
     mySettle: function() {
-      return __webpack_require__.e(/*! import() | components/my-settle/my-settle */ "components/my-settle/my-settle").then(__webpack_require__.bind(null, /*! @/components/my-settle/my-settle.vue */ 133))
+      return Promise.all(/*! import() | components/my-settle/my-settle */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/my-settle/my-settle")]).then(__webpack_require__.bind(null, /*! @/components/my-settle/my-settle.vue */ 133))
     }
   }
 } catch (e) {
@@ -217,13 +217,13 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
 
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({
     radioChangeHandler: function radioChangeHandler(e) {
-      this.updataGoodsState(e);
+      this.updateGoodsState(e);
     } },
-  (0, _vuex.mapMutations)('m_cart', ['updataGoodsState'])),
-  (0, _vuex.mapMutations)('m_cart', ['updataGoodsCount'])),
+  (0, _vuex.mapMutations)('m_cart', ['updateGoodsState'])),
+  (0, _vuex.mapMutations)('m_cart', ['updateGoodsCount'])),
   (0, _vuex.mapMutations)('m_cart', ['removeGoodsById'])), {}, {
     numChangeHandler: function numChangeHandler(e) {
-      this.updataGoodsCount(e);
+      this.updateGoodsCount(e);
     },
     swipeItemClickHandler: function swipeItemClickHandler(goods) {
       this.removeGoodsById(goods.goods_id);
